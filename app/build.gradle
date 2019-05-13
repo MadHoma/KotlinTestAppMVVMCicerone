@@ -11,7 +11,7 @@ android {
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        buildConfigField "String", "SERVER", '"http://services.groupkt.com/"'
     }
     buildTypes {
         release {
@@ -49,6 +49,7 @@ dependencies {
     implementation "com.android.support:appcompat-v7:$support_library_version"
     implementation "com.android.support:support-v13:$support_library_version"
     implementation "com.android.support:design:$support_library_version"
+    implementation "com.android.support.constraint:constraint-layout:$constraint_version"
 
     // Koin
     implementation "org.koin:koin-android:$koin_version"

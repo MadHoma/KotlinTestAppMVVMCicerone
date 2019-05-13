@@ -1,14 +1,15 @@
-package com.test.kotlin.presentation.base.view
+package com.test.kotlin.ui.activity
 
 import android.os.Bundle
 import android.support.design.widget.CoordinatorLayout
 import android.view.LayoutInflater
 import com.arellomobile.mvp.MvpAppCompatActivity
+import com.test.kotlin.mvp.view.BaseView
 
-abstract class BaseActivity<V : BaseView> : MvpAppCompatActivity(), BaseView {
+abstract class BaseActivity<V : BaseView> : MvpAppCompatActivity(),
+    BaseView {
 
     private var mRootView: android.view.View? = null
-    abstract val contextName: String
 
     protected abstract val mLayoutResource: Int
 

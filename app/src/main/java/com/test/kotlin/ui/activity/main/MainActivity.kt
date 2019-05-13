@@ -1,30 +1,47 @@
 package com.test.kotlin.ui.activity.main
 
 import android.os.Bundle
+import android.support.v7.widget.LinearLayoutManager
+import android.view.View
+import android.widget.Toast
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.test.kotlin.R
-import com.test.kotlin.di.ActivityModule
+import com.test.kotlin.mvp.model.entity.State
 import com.test.kotlin.mvp.presentation.MainPresenter
 import com.test.kotlin.mvp.view.MainView
-import com.test.kotlin.presentation.base.view.BaseActivity
-import org.koin.android.ext.android.inject
+import com.test.kotlin.ui.activity.BaseActivity
+import com.test.kotlin.ui.activity.detail.DetailActivity
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity<MainView>(), MainView {
 
-    override val contextName = ActivityModule.CTX_MAIN_ACTIVITY
-
-
     override val mLayoutResource: Int = R.layout.activity_main
-val string: String by inject()
+
     @InjectPresenter
     lateinit var mPresenter: MainPresenter
 
+    private lateinit var adapter: StateAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        adapter = StateAdapter {
+            startActivity(DetailActivity.initIntent(this, it))
+        }
+        rvList.layoutManager = LinearLayoutManager(this)
+        rvList.adapter = adapter
+        mPresenter.load()
     }
 
-    override fun showId(mId: Long) {
+    override fun loading(isShowLoading: Boolean) {
+        progressBar.visibility = if (isShowLoading) View.VISIBLE else View.GONE
+    }
 
+    override fun show(list: List<State>) {
+        adapter.list = list
+        adapter.notifyDataSetChanged()
+    }
+
+    override fun showMessage(res: Int) {
+        Toast.makeText(this, res, Toast.LENGTH_SHORT).show()
     }
 }

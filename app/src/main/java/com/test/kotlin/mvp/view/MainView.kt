@@ -1,7 +1,13 @@
 package com.test.kotlin.mvp.view
 
-import com.test.kotlin.presentation.base.view.BaseView
+import android.support.annotation.StringRes
+import com.test.kotlin.mvp.model.entity.State
 
 interface MainView: BaseView {
-    fun showId(mId: Long)
+
+    fun show(list: List<State>)
+
+    fun loading(isShowLoading: Boolean)
+
+    fun showMessage(@StringRes res: Int)
 }

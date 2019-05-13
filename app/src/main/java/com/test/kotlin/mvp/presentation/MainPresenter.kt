@@ -1,18 +1,37 @@
 package com.test.kotlin.mvp.presentation
 
-import android.util.Log
-import com.test.kotlin.presentation.base.view.BasePresenter
+import android.annotation.SuppressLint
+import com.arellomobile.mvp.InjectViewState
+import com.test.kotlin.R
+import com.test.kotlin.mvp.model.api.MainApi
 import com.test.kotlin.mvp.view.MainView
-import org.koin.standalone.inject
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
+import java.net.UnknownHostException
 
-class MainPresenter() : BasePresenter<MainView>() {
+@SuppressLint("CheckResult")
+@InjectViewState
+class MainPresenter : BasePresenter<MainView>() {
 
-    val string:String by inject()
+    private val mApi: MainApi by inject()
 
-    init {
-        Log.d("LOGS", string)
-
+    fun load(){
+        mApi.getState()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .doOnSubscribe { this.unSubscribeOnDestroy(it) }
+            .doOnSubscribe { viewState.loading(true) }
+            .doOnEvent { _, _ -> viewState.loading(false) }
+            .subscribe(
+                {
+                   viewState.show(it.getData())
+                },
+                {
+                    if(it is UnknownHostException){
+                        viewState.showMessage(R.string.network_error)
+                    } else viewState.showMessage(R.string.unknown_error)
+                    it.printStackTrace()
+                 })
     }
-
 
 }
