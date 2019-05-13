@@ -1,4 +1,4 @@
-package com.test.kotlin
+package com.test.kotlin.app
 
 import android.app.Application
 import com.test.kotlin.di.activityModule
