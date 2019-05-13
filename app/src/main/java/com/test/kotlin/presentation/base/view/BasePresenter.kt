@@ -1,27 +1,18 @@
 package com.test.kotlin.presentation.base.view
 
+import com.arellomobile.mvp.MvpPresenter
 import io.reactivex.disposables.CompositeDisposable
+import org.koin.standalone.KoinComponent
 import java.lang.ref.WeakReference
 
-abstract class BasePresenter<V : BaseView> : Presenter<V> {
-
-    var mBaseView: WeakReference<V>? = null
-
-    override var mView: V? = null
-        get() = mBaseView?.get()
+abstract class BasePresenter<V : BaseView> : MvpPresenter<V>(), KoinComponent {
 
     private val mCompositeDisposable = CompositeDisposable()
 
-    override fun attachView(view: V) {
-        mBaseView = WeakReference(view)
-    }
-
-    override fun isViewAttached(): Boolean = mBaseView?.get() != null ?: false
-
-
-    override fun detachView() {
+    override fun detachView(view: V) {
         mCompositeDisposable.clear()
-        mBaseView?.clear()
-        mBaseView = null
+        super.detachView(view)
+
     }
+
 }

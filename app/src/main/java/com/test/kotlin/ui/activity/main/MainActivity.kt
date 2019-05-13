@@ -1,27 +1,30 @@
-package com.test.kotlin.presentation.ui.main
+package com.test.kotlin.ui.activity.main
 
 import android.os.Bundle
+import com.arellomobile.mvp.presenter.InjectPresenter
 import com.test.kotlin.R
-import org.koin.android.ext.android.inject
 import com.test.kotlin.di.ActivityModule
+import com.test.kotlin.mvp.presentation.MainPresenter
+import com.test.kotlin.mvp.view.MainView
 import com.test.kotlin.presentation.base.view.BaseActivity
-import com.test.kotlin.presentation.base.view.toast
+import org.koin.android.ext.android.inject
 
-class MainActivity : BaseActivity<MainContract.View, MainContract.MainPresenter>(), MainContract.View {
+class MainActivity : BaseActivity<MainView>(), MainView {
 
     override val contextName = ActivityModule.CTX_MAIN_ACTIVITY
 
-    override val mPresenter by inject<MainContract.MainPresenter>()
 
     override val mLayoutResource: Int = R.layout.activity_main
+val string: String by inject()
+    @InjectPresenter
+    lateinit var mPresenter: MainPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        mPresenter.getInfo()
+        setContentView(R.layout.activity_main)
     }
 
     override fun showId(mId: Long) {
-        toast(mId.toString())
+
     }
 }

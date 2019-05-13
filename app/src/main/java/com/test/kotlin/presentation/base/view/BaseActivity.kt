@@ -3,13 +3,14 @@ package com.test.kotlin.presentation.base.view
 import android.os.Bundle
 import android.support.design.widget.CoordinatorLayout
 import android.view.LayoutInflater
-import org.koin.android.contextaware.ContextAwareActivity
+import com.arellomobile.mvp.MvpAppCompatActivity
 
-abstract class BaseActivity<V : BaseView, out P : Presenter<V>> : ContextAwareActivity(), BaseView {
+abstract class BaseActivity<V : BaseView> : MvpAppCompatActivity(), BaseView {
 
     private var mRootView: android.view.View? = null
+    abstract val contextName: String
 
-    protected abstract val mPresenter: P
+    protected abstract val mLayoutResource: Int
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,12 +25,7 @@ abstract class BaseActivity<V : BaseView, out P : Presenter<V>> : ContextAwareAc
         }
 
         setContentView(mRootView)
-
-        mPresenter.attachView(this as V)
     }
 
-    public override fun onDestroy() {
-        mPresenter.detachView()
-        super.onDestroy()
-    }
+
 }

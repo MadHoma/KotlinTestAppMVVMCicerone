@@ -1,6 +1,7 @@
 package com.test.kotlin.presentation.base.view
 
-interface BaseView {
+import com.arellomobile.mvp.MvpView
 
-    val mLayoutResource: Int
+interface BaseView: MvpView {
+
 }

@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
 
 android {
@@ -27,6 +28,13 @@ android {
         prod {
             dimension "default"
         }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kapt {
+        correctErrorTypes true
     }
 }
 
@@ -59,7 +67,9 @@ dependencies {
     implementation "com.bluelinelabs:logansquare:$logansquare_version"
     implementation "com.github.aurae.retrofit2:converter-logansquare:$logansquare_converter_version"
 
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.1'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+
+    //Moxy
+    implementation "com.arello-mobile:moxy:$moxyVersion"
+    kapt "com.arello-mobile:moxy-compiler:$moxyVersion"
+    implementation "com.arello-mobile:moxy-app-compat:$moxyVersion"
 }

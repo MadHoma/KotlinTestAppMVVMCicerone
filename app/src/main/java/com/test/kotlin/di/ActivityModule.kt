@@ -1,19 +1,16 @@
 package com.test.kotlin.di
 
-import org.koin.android.module.AndroidModule
-import com.test.kotlin.presentation.ui.main.MainContract
-import com.test.kotlin.presentation.ui.main.MainPresenter
+import com.test.kotlin.presentation.base.model.BaseModel
+import org.koin.android.ext.koin.androidApplication
+import org.koin.dsl.module.applicationContext
+import org.koin.dsl.module.module
 
-class ActivityModule : AndroidModule() {
+object ActivityModule {
 
-    companion object {
-        const val CTX_MAIN_ACTIVITY = "MainActivity"
-    }
+    const val CTX_MAIN_ACTIVITY = "MainActivity"
+}
 
-    override fun context() = applicationContext {
-        context(name = CTX_MAIN_ACTIVITY) {
-            provide { MainPresenter(get()) } bind (MainContract.MainPresenter::class)
-        }
+val activityModule = module {
 
-    }
+    single { "asdasdasd" }
 }
