@@ -7,10 +7,11 @@ import android.widget.Toast
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.test.kotlin.R
 import com.test.kotlin.mvp.model.entity.State
-import com.test.kotlin.mvp.presentation.MainPresenter
-import com.test.kotlin.mvp.view.MainView
+import com.test.kotlin.mvp.presentation.main.MainPresenter
+import com.test.kotlin.mvp.view.main.MainView
 import com.test.kotlin.ui.activity.BaseActivity
 import com.test.kotlin.ui.activity.detail.DetailActivity
+import com.test.kotlin.ui.adapter.StateAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity<MainView>(), MainView {

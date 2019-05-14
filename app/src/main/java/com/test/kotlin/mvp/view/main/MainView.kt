@@ -1,7 +1,8 @@
-package com.test.kotlin.mvp.view
+package com.test.kotlin.mvp.view.main
 
 import android.support.annotation.StringRes
 import com.test.kotlin.mvp.model.entity.State
+import com.test.kotlin.mvp.view.BaseView
 
 interface MainView: BaseView {
 

@@ -1,4 +1,4 @@
-package com.test.kotlin.ui.activity.main
+package com.test.kotlin.ui.adapter
 
 import android.annotation.SuppressLint
 import android.support.v7.widget.RecyclerView

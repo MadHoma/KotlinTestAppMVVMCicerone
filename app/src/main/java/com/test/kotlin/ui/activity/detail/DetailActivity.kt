@@ -7,12 +7,13 @@ import android.view.MenuItem
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.test.kotlin.R
 import com.test.kotlin.mvp.model.entity.State
-import com.test.kotlin.mvp.presentation.DetailPresenter
-import com.test.kotlin.mvp.view.DetailView
+import com.test.kotlin.mvp.presentation.detail.DetailPresenter
+import com.test.kotlin.mvp.view.detail.DetailView
 import com.test.kotlin.ui.activity.BaseActivity
 import kotlinx.android.synthetic.main.activity_detail.*
 
-class DetailActivity : BaseActivity<DetailView>(), DetailView {
+class DetailActivity : BaseActivity<DetailView>(),
+    DetailView {
 
     companion object {
         private const val STATE = "state"
