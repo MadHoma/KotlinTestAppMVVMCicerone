@@ -3,7 +3,9 @@ package com.test.kotlin.mvp.presentation.main
 import android.annotation.SuppressLint
 import com.arellomobile.mvp.InjectViewState
 import com.test.kotlin.R
+import com.test.kotlin.coordinator.StateFlowCoordinator
 import com.test.kotlin.domain.interactor.GetStateListInteractor
+import com.test.kotlin.mvp.model.entity.State
 import com.test.kotlin.mvp.presentation.BasePresenter
 import com.test.kotlin.mvp.view.main.MainView
 import java.net.UnknownHostException
@@ -13,6 +15,7 @@ import java.net.UnknownHostException
 class MainPresenter : BasePresenter<MainView>() {
 
     private val mGetStateList: GetStateListInteractor by inject()
+    private val mStateFlowCoordinator: StateFlowCoordinator by inject()
 
     fun load(){
         mGetStateList.execute(
@@ -29,6 +32,10 @@ class MainPresenter : BasePresenter<MainView>() {
                 viewState.loading(it)
             }
         )
+    }
+
+    fun openDetail(item: State){
+        mStateFlowCoordinator.openDetail(item)
     }
 
 }

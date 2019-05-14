@@ -26,7 +26,7 @@ class MainActivity : BaseActivity<MainView>(), MainView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         adapter = StateAdapter {
-            startActivity(DetailActivity.initIntent(this, it))
+          mPresenter.openDetail(it)
         }
         rvList.layoutManager = LinearLayoutManager(this)
         rvList.adapter = adapter
