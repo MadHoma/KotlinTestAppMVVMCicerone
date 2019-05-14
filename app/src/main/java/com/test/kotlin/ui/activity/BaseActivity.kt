@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.test.kotlin.mvp.view.BaseView
 
-abstract class BaseActivity<V : BaseView> : MvpAppCompatActivity(),
+abstract class BaseActivity : MvpAppCompatActivity(),
     BaseView {
 
     private var mRootView: android.view.View? = null
