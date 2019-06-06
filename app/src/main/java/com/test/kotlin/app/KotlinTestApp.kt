@@ -12,6 +12,8 @@ class KotlinTestApp : Application() {
         super.onCreate()
 
         startKoin(this, listOf(
-            appModule, networkModule, mainModule))
+            appModule, networkModule, mainModule
+        )
+        )
     }
 }

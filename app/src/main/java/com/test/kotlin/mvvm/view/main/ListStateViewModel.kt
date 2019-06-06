@@ -2,15 +2,16 @@ package com.test.kotlin.mvvm.view.main
 
 import android.arch.lifecycle.MutableLiveData
 import com.test.kotlin.R
-import com.test.kotlin.coordinator.StateFlowCoordinator
+import com.test.kotlin.coordinator.Screens
 import com.test.kotlin.domain.interactor.GetStateListInteractor
 import com.test.kotlin.mvvm.model.entity.State
 import com.test.kotlin.mvvm.view.BaseViewModel
+import ru.terrakok.cicerone.Router
 import java.net.UnknownHostException
 
 class ListStateViewModel(
     private val mGetStateList: GetStateListInteractor,
-    private val mStateFlowCoordinator: StateFlowCoordinator
+    private val mRouter: Router
 ): BaseViewModel(){
 
     val list = MutableLiveData<List<State>>()
@@ -35,7 +36,7 @@ class ListStateViewModel(
     }
 
     fun openDetail(item: State){
-        mStateFlowCoordinator.openDetail(item)
+        mRouter.navigateTo(Screens.DetailScreen(item))
     }
 
 }

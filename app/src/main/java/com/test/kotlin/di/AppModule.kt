@@ -1,11 +1,13 @@
 package com.test.kotlin.di
 
-import com.test.kotlin.coordinator.Navigator
-import org.koin.android.ext.koin.androidApplication
 import org.koin.dsl.module.module
+import ru.terrakok.cicerone.Cicerone
+import ru.terrakok.cicerone.Router
 
 val appModule = module {
 
-    single { Navigator() }
+    single { Cicerone.create<Router>(Router()) }
+    single<Router> { get<Cicerone<Router>>().router }
+    single { get<Cicerone<Router>>().navigatorHolder }
 
 }
