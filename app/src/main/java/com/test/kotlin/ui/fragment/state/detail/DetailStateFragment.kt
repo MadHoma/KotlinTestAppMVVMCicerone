@@ -2,17 +2,19 @@ package com.test.kotlin.ui.fragment.state.detail
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.view.MenuItem
+import android.view.LayoutInflater
 import android.view.View
-import com.arellomobile.mvp.presenter.InjectPresenter
+import android.view.ViewGroup
 import com.test.kotlin.R
-import com.test.kotlin.mvp.model.entity.State
-import com.test.kotlin.mvp.presentation.detail.DetailPresenter
-import com.test.kotlin.mvp.view.detail.DetailView
+import com.test.kotlin.databinding.FragmentDetailBinding
+import com.test.kotlin.mvvm.model.entity.State
+import com.test.kotlin.mvvm.view.detail.DetailViewModel
 import com.test.kotlin.ui.fragment.BaseFragment
+import com.test.kotlin.util.binding
 import kotlinx.android.synthetic.main.fragment_detail.*
+import org.koin.android.viewmodel.ext.android.viewModel
 
-class DetailStateFragment : BaseFragment(), DetailView {
+class DetailStateFragment : BaseFragment() {
 
 
     companion object {
@@ -26,22 +28,23 @@ class DetailStateFragment : BaseFragment(), DetailView {
         }
     }
 
-    override val mLayoutResource: Int = R.layout.fragment_detail
+    private lateinit var binding: FragmentDetailBinding
+    private val vm: DetailViewModel by viewModel()
 
-    @InjectPresenter
-    lateinit var mPresenter: DetailPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
         (activity as AppCompatActivity).supportActionBar?.setDisplayShowHomeEnabled(true)
-        mPresenter.setItem(arguments.getParcelable(STATE))
+        val item = arguments.getParcelable(STATE) as State
+        (activity as AppCompatActivity).supportActionBar?.title  = "${item.name}, ${item.country}, ${item.abbr}"
+        vm.state.value = item
     }
 
-    override fun showInfo(item: State) {
-        (activity as AppCompatActivity).supportActionBar?.title  = "${item.name}, ${item.country}, ${item.abbr}"
-        tvCapital.text = item.capital
-        tvLargestCity.text = item.largest_city
-        tvId.text = item.id.toString()
+    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        binding = container!!.binding(R.layout.fragment_detail)
+        binding.lifecycleOwner = this
+        binding.vm = vm
+        return binding.root
     }
 }

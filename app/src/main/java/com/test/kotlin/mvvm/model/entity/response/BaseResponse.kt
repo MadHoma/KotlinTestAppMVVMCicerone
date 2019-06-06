@@ -1,4 +1,4 @@
-package com.test.kotlin.mvp.model.entity.response
+package com.test.kotlin.mvvm.model.entity.response
 
 import com.google.gson.annotations.SerializedName
 

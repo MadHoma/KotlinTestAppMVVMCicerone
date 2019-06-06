@@ -1,4 +1,4 @@
-package com.test.kotlin.mvp.model.entity
+package com.test.kotlin.mvvm.model.entity
 
 import android.os.Parcel
 import android.os.Parcelable

@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.test.kotlin.R
-import com.test.kotlin.mvp.model.entity.State
+import com.test.kotlin.mvvm.model.entity.State
 import kotlinx.android.synthetic.main.li_state.view.*
 
 class StateAdapter( private val onClickItem: (item: State) -> Unit) : RecyclerView.Adapter<StateAdapter.StateHolder>() {

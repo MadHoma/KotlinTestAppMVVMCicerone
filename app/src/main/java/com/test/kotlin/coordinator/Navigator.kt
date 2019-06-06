@@ -2,7 +2,7 @@ package com.test.kotlin.coordinator
 
 import android.support.v7.app.AppCompatActivity
 import com.test.kotlin.R
-import com.test.kotlin.mvp.model.entity.State
+import com.test.kotlin.mvvm.model.entity.State
 import com.test.kotlin.ui.fragment.state.detail.DetailStateFragment
 import com.test.kotlin.ui.fragment.state.list.ListStateFragment
 

@@ -2,12 +2,10 @@ package com.test.kotlin.ui.activity
 
 import android.os.Bundle
 import android.support.design.widget.CoordinatorLayout
+import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
-import com.arellomobile.mvp.MvpAppCompatActivity
-import com.test.kotlin.mvp.view.BaseView
 
-abstract class BaseActivity : MvpAppCompatActivity(),
-    BaseView {
+abstract class BaseActivity : AppCompatActivity() {
 
     private var mRootView: android.view.View? = null
 
